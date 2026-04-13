@@ -13,7 +13,7 @@ NiveLine için proje kökünde oluşturulmuş bağımsız statik landing page.
 ## Lokal çalıştırma
 
 ```bash
-python3 -m http.server 8080 --directory NiveLineWeb
+python3 -m http.server 8080
 ```
 
 Sonra tarayıcıda:
