@@ -632,6 +632,22 @@ const applyTranslations = (language) => {
     descriptionNode.setAttribute("content", copy.metaDescription);
   }
 
+  // OG + Twitter meta güncelleme (dil değişiminde)
+  const ogLocaleMap = { tr: "tr_TR", en: "en_US", es: "es_ES" };
+  const ogTitleVal  = copy.metaTitle;
+  const ogDescVal   = copy.metaDescription;
+  const ogLocaleVal = ogLocaleMap[activeLanguage] || "en_US";
+  [
+    ["property", "og:title",       "content", ogTitleVal],
+    ["property", "og:description", "content", ogDescVal],
+    ["property", "og:locale",      "content", ogLocaleVal],
+    ["name",     "twitter:title",       "content", ogTitleVal],
+    ["name",     "twitter:description", "content", ogDescVal],
+  ].forEach(([attr, val, prop, newVal]) => {
+    const el = document.querySelector(`meta[${attr}="${val}"]`);
+    if (el) el.setAttribute(prop, newVal);
+  });
+
   i18nNodes.forEach((node) => {
     const key = node.dataset.i18n;
     const value = copy[key];
