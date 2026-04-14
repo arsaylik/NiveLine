@@ -339,12 +339,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
+  max-width: 100vw;
   position: relative;
   color: var(--text);
   background:
@@ -428,7 +430,9 @@ svg {
 
 .shell {
   width: var(--shell);
+  max-width: 100%;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .topbar {
@@ -3640,6 +3644,18 @@ svg {
     grid-template-columns: 1fr;
   }
 
+  /* Story + Security + Experience tek kolona geç */
+  .story {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .experience-layout,
+  .security {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
   /* Product 880 */
   .feat-hero-grid {
     grid-template-columns: 1fr;
@@ -4192,6 +4208,30 @@ svg {
   }
 }
 
+/* ── 680px: inline mock chat kartları tek kolon ── */
+@media (max-width: 680px) {
+  .fmc-cards,
+  .content-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-notes > span {
+    padding: 14px 16px;
+  }
+
+  /* Section padding azalt */
+  .story,
+  .experience,
+  .security,
+  .download {
+    padding-top: 64px;
+  }
+}
+
 @media (max-width: 520px) {
   .hero {
     padding-top: 72px;
@@ -4281,6 +4321,7 @@ svg {
     padding: 12px 18px;
     gap: 12px;
     min-height: 64px;
+    min-width: 0;
     border-radius: 20px;
   }
 
@@ -4492,6 +4533,18 @@ svg {
     display: flex;
     flex-direction: column;
     gap: 14px;
+  }
+
+  /* fmc-cards ve content-card-grid: tek kolon */
+  .fmc-cards,
+  .content-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Inline mock kartlar küçülsün */
+  .fmc-card,
+  .content-card {
+    padding: 10px 12px;
   }
 
   /* ── 3. Canvas side mini-paneller: canvas-side ── */
