@@ -3,22 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NiveLine | Modern messaging built on selective access and layered security</title>
-  <meta
-    name="description"
-    content="NiveLine sets a more deliberate standard for modern communication with passkey-ready account security, selective discovery, message requests and refined group flows."
-  >
+
+  <!-- ── Primary Meta ── -->
+  <title>NiveLine — Secure Messaging with Passkey, Invite-Only Access & Group Privacy</title>
+  <meta name="description" content="NiveLine is a private messaging app built on passkey security, message requests, QR invite codes and group previews. Control who contacts you, from day one. Coming to iOS & Android.">
+  <meta name="keywords" content="NiveLine, secure messaging app, passkey messaging, private chat, invite only messaging, message requests, group privacy, iOS Android messaging, end-to-end encrypted">
+  <meta name="author" content="NiveLine">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#050507">
+  <link rel="canonical" href="https://niveline.com/">
+
+  <!-- ── hreflang (multilingual: TR / EN / ES) ── -->
+  <link rel="alternate" hreflang="en" href="https://niveline.com/">
+  <link rel="alternate" hreflang="tr" href="https://niveline.com/">
+  <link rel="alternate" hreflang="es" href="https://niveline.com/">
+  <link rel="alternate" hreflang="x-default" href="https://niveline.com/">
+
+  <!-- ── Open Graph / Facebook ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://niveline.com/">
+  <meta property="og:title" content="NiveLine — Secure Messaging with Passkey & Invite-Only Access">
+  <meta property="og:description" content="A private messaging app where you control who reaches you. Passkey security, message requests, QR invite codes and group previews. Coming to iOS & Android.">
+  <meta property="og:image" content="https://niveline.com/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NiveLine — Secure Messaging App">
+  <meta property="og:site_name" content="NiveLine">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="tr_TR">
+  <meta property="og:locale:alternate" content="es_ES">
+
+  <!-- ── Twitter / X Card ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@NiveLine">
+  <meta name="twitter:creator" content="@NiveLine">
+  <meta name="twitter:url" content="https://niveline.com/">
+  <meta name="twitter:title" content="NiveLine — Secure Messaging with Passkey & Invite-Only Access">
+  <meta name="twitter:description" content="A private messaging app where you control who reaches you. Passkey security, message requests, QR invite codes and group previews.">
+  <meta name="twitter:image" content="https://niveline.com/assets/og-image.png">
+  <meta name="twitter:image:alt" content="NiveLine — Secure Messaging App">
+
+  <!-- ── App Store Meta ── -->
+  <meta name="apple-itunes-app" content="app-id=placeholder">
+  <meta name="google-play-app" content="app-id=placeholder">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NiveLine">
+
+  <!-- ── Structured Data (JSON-LD) ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NiveLine",
+    "description": "A private messaging app built on passkey security, selective discovery, message requests, QR invite codes and group previews.",
+    "applicationCategory": "CommunicationApplication",
+    "operatingSystem": "iOS, Android",
+    "url": "https://niveline.com",
+    "image": "https://niveline.com/assets/og-image.png",
+    "author": {
+      "@type": "Organization",
+      "name": "NiveLine",
+      "url": "https://niveline.com"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Passkey-ready account security",
+      "Message requests for first contact",
+      "QR and invite code matching",
+      "Group previews before joining",
+      "End-to-end encrypted messaging"
+    ]
+  }
+  </script>
+
+  <!-- ── Fonts ── -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap"
     rel="stylesheet"
   >
+
+  <!-- ── LCP Preload (hero görseli) ── -->
+  <link rel="preload" as="image" href="assets/hero-home-front.png" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/niveline-logo-transparent.png">
+
+  <!-- ── Favicons ── -->
   <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
   <link rel="shortcut icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/niveline-logo-stacked-transparent-512.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="assets/niveline-logo-stacked-transparent-512.png">
+
   <link rel="stylesheet" href="styles.css">
+  <!-- Sitemap hint for crawlers -->
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 </head>
 <body>
   <!-- ── Coming Soon Splash ── -->
@@ -105,8 +188,8 @@
 
   </header>
 
-  <main id="top">
-    <section class="hero shell">
+  <main id="top" role="main" aria-label="NiveLine ana içeriği">
+    <section class="hero shell" aria-label="NiveLine — güvenli ve seçici mesajlaşma">
       <div class="hero-copy is-visible" data-reveal>
         <span class="eyebrow-pill" data-i18n="hero.eyebrow">Seçici erişim ve çok katmanlı güvenlik üzerine inşa edildi</span>
         <h1 data-i18n="hero.title">Herkese açık değil. Seçtiğin kişilerle, güvenli, odaklanmış iletişim.</h1>
@@ -223,7 +306,7 @@
       </div>
     </section>
 
-    <section class="signal-band shell" data-reveal>
+    <section class="signal-band shell" data-reveal aria-label="Temel özellikler">
       <div class="band-track">
         <span class="band-item">
           <span class="band-item-icon" aria-hidden="true">
@@ -282,10 +365,10 @@
       </div>
     </section>
 
-    <section class="story shell" id="difference">
+    <section class="story shell" id="difference" aria-labelledby="story-heading">
       <div class="section-copy" data-reveal>
         <p class="eyebrow" data-i18n="story.eyebrow">Yaklaşım</p>
-        <h2 data-i18n="story.title">Erişimden grup akışına kadar her adım daha bilinçli tasarlandı.</h2>
+        <h2 id="story-heading" data-i18n="story.title">Erişimden grup akışına kadar her adım daha bilinçli tasarlandı.</h2>
         <p data-i18n="story.body">
           NiveLine, herkese açık bir mesajlaşma mantığı yerine; kontrollü keşif,
           net arayüz hiyerarşisi ve yüksek güven duygusu üzerine kurulur.
@@ -338,13 +421,13 @@
       <div class="mobile-dots" id="dots-advantage" aria-hidden="true"></div>
     </section>
 
-    <section class="experience shell" id="features">
+    <section class="experience shell" id="features" aria-labelledby="features-heading">
 
       <!-- ── Bölüm başlık bloğu ── -->
       <div class="feat-header" data-reveal>
         <div class="feat-header-copy">
           <p class="eyebrow" data-i18n="features.eyebrow">Ürün</p>
-          <h2 data-i18n="features.title">Sohbet, davet ve ayarlar aynı arayüz sisteminde birleşir.</h2>
+          <h2 id="features-heading" data-i18n="features.title">Sohbet, davet ve ayarlar aynı arayüz sisteminde birleşir.</h2>
           <p data-i18n="features.body">
             Gerçek ürün hissi; yalnızca koyu tema ile değil, ritim, boşluk,
             tipografi ve etkileşim kararlarının tutarlı olmasıyla oluşur.
@@ -770,10 +853,10 @@
 
     </section>
 
-    <section class="security shell" id="security">
+    <section class="security shell" id="security" aria-labelledby="security-heading">
       <div class="security-copy" data-reveal>
         <p class="eyebrow" data-i18n="security.eyebrow">Koruma</p>
-        <h2 data-i18n="security.title">Erişim, cihaz ve görünürlük tercihleri aynı güven modeline bağlanır.</h2>
+        <h2 id="security-heading" data-i18n="security.title">Erişim, cihaz ve görünürlük tercihleri aynı güven modeline bağlanır.</h2>
         <p data-i18n="security.body">
           NiveLine’da güvenlik, tek bir ekran ya da tek bir vaat değil;
           hesabın tüm yaşam döngüsüne yayılan bir tasarım kararıdır.
@@ -838,11 +921,11 @@
       </aside>
     </section>
 
-    <section class="download shell" id="download">
+    <section class="download shell" id="download" aria-labelledby="download-heading">
       <div class="download-panel">
         <div class="download-copy" data-reveal>
           <p class="eyebrow" data-i18n="download.eyebrow">Platformlar</p>
-          <h2 data-i18n="download.title">NiveLine’ı App Store ve Google Play üzerinden edinin.</h2>
+          <h2 id="download-heading" data-i18n="download.title">NiveLine’ı App Store ve Google Play üzerinden edinin.</h2>
           <p data-i18n="download.body">
             Mağaza bağlantıları için görünür ve güçlü bir alan ayırdım. Gerçek
             App Store ve Google Play URL’leri geldiğinde yalnızca hedefleri
@@ -881,7 +964,7 @@
     </section>
   </main>
 
-  <footer class="footer shell">
+  <footer class="footer shell" role="contentinfo" aria-label="Site alt bilgisi">
     <div class="footer-panel">
 
       <!-- Üst: Logo + slogan + navigasyon -->
