@@ -1194,6 +1194,12 @@ svg {
   min-height: 760px;
 }
 
+/* Sinematik katmanlar — masaüstünde gizli */
+.hero-cinema-vignette,
+.hero-cinema-grain {
+  display: none;
+}
+
 .stage-composition {
   position: relative;
   width: 700px;
@@ -3958,35 +3964,94 @@ svg {
     max-height: 78vh;
     width: 100%;
     overflow: hidden;
-    border-radius: 28px;
-    border: 1px solid rgba(168, 85, 247, 0.22);
+    border-radius: 32px;
+    border: 1.5px solid rgba(168, 85, 247, 0.30);
     background:
-      radial-gradient(ellipse at 50% 0%, rgba(147,51,234,0.30) 0%, transparent 52%),
-      radial-gradient(ellipse at 10% 90%, rgba(126,34,206,0.18) 0%, transparent 48%),
-      radial-gradient(ellipse at 90% 50%, rgba(168,85,247,0.10) 0%, transparent 48%),
-      linear-gradient(180deg, rgba(6,4,12,0.90) 0%, rgba(8,6,14,0.95) 100%);
+      radial-gradient(ellipse at 50% 0%, rgba(147,51,234,0.35) 0%, transparent 52%),
+      radial-gradient(ellipse at 10% 90%, rgba(126,34,206,0.22) 0%, transparent 48%),
+      radial-gradient(ellipse at 90% 50%, rgba(168,85,247,0.14) 0%, transparent 48%),
+      linear-gradient(180deg, #000 0%, #050309 100%);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.12),
-      inset 0 0 80px rgba(147,51,234,0.06),
-      0 40px 100px rgba(0,0,0,0.65),
-      0 0 0 1px rgba(147,51,234,0.10),
-      0 0 120px rgba(147,51,234,0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+      inset 0 1px 0 rgba(255,255,255,0.14),
+      inset 0 0 100px rgba(147,51,234,0.08),
+      0 0 0 1px rgba(147,51,234,0.12),
+      0 24px 80px rgba(0,0,0,0.70),
+      0 0 160px rgba(147,51,234,0.10),
+      0 0 60px rgba(168,85,247,0.06);
     position: relative;
+    isolation: isolate;
   }
 
-  /* Üst kenar ışık çizgisi */
+  /* ── Sinematik üst kenar ışık çizgisi ── */
   .hero-stage::before {
     content: "";
     position: absolute;
     top: 0;
-    left: 10%;
-    right: 10%;
+    left: 5%;
+    right: 5%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(168,85,247,0.40), rgba(192,132,252,0.50), rgba(168,85,247,0.40), transparent);
-    z-index: 5;
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(168,85,247,0.35) 20%,
+      rgba(192,132,252,0.65) 50%,
+      rgba(168,85,247,0.35) 80%,
+      transparent);
+    z-index: 10;
     pointer-events: none;
+  }
+
+  /* ── Sinematik vignette overlay ── */
+  .hero-cinema-vignette {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 7;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(ellipse at 50% 50%,
+      transparent 55%,
+      rgba(0,0,0,0.25) 75%,
+      rgba(0,0,0,0.55) 100%);
+  }
+
+  /* ── Sinematik film grain ── */
+  .hero-cinema-grain {
+    display: block;
+    position: absolute;
+    inset: -50%;
+    z-index: 8;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+    animation: grainShift 0.5s steps(4) infinite;
+  }
+
+  @keyframes grainShift {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-5%, -5%); }
+    50%  { transform: translate(5%, 2%); }
+    75%  { transform: translate(-2%, 5%); }
+    100% { transform: translate(0, 0); }
+  }
+
+  /* ── Sinematik alt kenar fade ── */
+  .hero-stage::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top,
+      rgba(0,0,0,0.85) 0%,
+      rgba(0,0,0,0.50) 35%,
+      rgba(0,0,0,0.15) 65%,
+      transparent 100%);
+    z-index: 6;
+    pointer-events: none;
+    border-radius: 0 0 32px 32px;
   }
 
   .stage-composition {
@@ -4015,23 +4080,32 @@ svg {
     display: grid;
     place-items: center;
     overflow: hidden;
-    padding: 12px 10px 52px;
+    padding: 0;
     --base-transform: none;
     --shift-x: 0px;
     --shift-y: 0px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1),
-                transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+    background: #000;
+    transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* Ken Burns: başlangıç — hafif zoom in ve shift */
   .screen-shot.parallax-layer {
-    transform: translate3d(0, 24px, 0) scale(0.94);
+    transform: translate3d(0, 0, 0) scale(1.06);
     will-change: opacity, transform;
   }
 
+  /* Ken Burns: aktif — yavaş zoom out */
   .screen-shot.is-active.parallax-layer {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1.0);
+    animation: kenBurns 7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  @keyframes kenBurns {
+    0%   { transform: scale(1.0)  translate3d(0, 0, 0); }
+    100% { transform: scale(1.06) translate3d(-1%, -0.5%, 0); }
   }
 
   .screen-shot.is-active {
@@ -4052,47 +4126,49 @@ svg {
   }
 
   .screen-shot img {
-    width: auto;
+    width: 100%;
     height: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    object-position: center center;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    object-position: center top;
     display: block;
+    background: #000;
   }
 
   .shot-home img,
   .shot-group img,
   .shot-chat img {
-    border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.40),
-                0 0 0 1px rgba(255,255,255,0.06);
+    border-radius: 0;
+    box-shadow: none;
+    background: #000;
   }
 
+  /* ── Sinematik slider kontrolleri ── */
   .hero-slider-controls {
     position: absolute;
     left: 50%;
-    bottom: 18px;
+    bottom: 20px;
     transform: translateX(-50%);
     z-index: 8;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 11px 20px;
-    border: 1px solid rgba(168, 85, 247, 0.22);
+    padding: 10px 20px;
+    border: 1px solid rgba(168, 85, 247, 0.28);
     border-radius: 999px;
     background:
-      radial-gradient(ellipse at 50% -20%, rgba(168, 85, 247, 0.24) 0%, transparent 70%),
-      linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%),
-      rgba(6, 5, 11, 0.78);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+      radial-gradient(ellipse at 50% -20%, rgba(168, 85, 247, 0.28) 0%, transparent 70%),
+      linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%),
+      rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(32px) saturate(1.4);
+    -webkit-backdrop-filter: blur(32px) saturate(1.4);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.10),
-      inset 0 -1px 0 rgba(0,0,0,0.20),
-      0 12px 36px rgba(0,0,0,0.50),
-      0 0 0 1px rgba(147,51,234,0.10),
-      0 0 48px rgba(147,51,234,0.08);
+      inset 0 1px 0 rgba(255,255,255,0.12),
+      inset 0 -1px 0 rgba(0,0,0,0.30),
+      0 12px 40px rgba(0,0,0,0.60),
+      0 0 0 1px rgba(147,51,234,0.12),
+      0 0 60px rgba(147,51,234,0.10);
     transition: box-shadow 300ms ease;
   }
 
@@ -4118,19 +4194,41 @@ svg {
   }
 
   .hero-slider-dot.is-active {
-    width: 32px;
-    height: 10px;
-    background: linear-gradient(90deg, #c084fc 0%, #a855f7 50%, #7c3aed 100%);
+    width: 36px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.12);
     box-shadow:
-      0 0 12px rgba(192, 132, 252, 0.60),
-      0 0 28px rgba(168, 85, 247, 0.35),
-      0 0 48px rgba(147, 51, 234, 0.15);
-    animation: sliderDotPulse 2.4s ease-in-out infinite;
+      0 0 14px rgba(192, 132, 252, 0.55),
+      0 0 32px rgba(168, 85, 247, 0.30);
+    position: relative;
+    overflow: hidden;
+    animation: none;
   }
 
-  @keyframes sliderDotPulse {
-    0%, 100% { box-shadow: 0 0 12px rgba(192,132,252,0.60), 0 0 28px rgba(168,85,247,0.35), 0 0 48px rgba(147,51,234,0.15); }
-    50% { box-shadow: 0 0 16px rgba(192,132,252,0.75), 0 0 36px rgba(168,85,247,0.45), 0 0 56px rgba(147,51,234,0.20); }
+  /* Progress fill — slider otomatik geçiş süresiyle senkron */
+  .hero-slider-dot.is-active::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #c084fc 0%, #a855f7 50%, #7c3aed 100%);
+    transform-origin: left center;
+    animation: dotProgress 3.6s linear forwards;
+    box-shadow: 0 0 8px rgba(192,132,252,0.50);
+  }
+
+  @keyframes dotProgress {
+    0%   { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+
+  .hero-slider-dot:not(.is-active) {
+    width: 8px;
+    height: 4px;
   }
 
   .note-icon,
@@ -4229,6 +4327,85 @@ svg {
   .security,
   .download {
     padding-top: 64px;
+  }
+
+  /* feat-showcase-list tam görünür, telefon mock gizli */
+  .feat-showcase {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 20px 0 12px;
+  }
+
+  .feat-showcase-visual {
+    display: none;
+  }
+
+  .feat-showcase-list {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .feat-showcase-label {
+    display: block;
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--purple-light);
+  }
+
+  /* feat-list: yatay scroll-snap slider */
+  .feat-list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 12px;
+    padding: 0 0 4px;
+    list-style: none;
+  }
+
+  .feat-list::-webkit-scrollbar { display: none; }
+
+  .feat-list-item {
+    flex-shrink: 0;
+    width: calc(82vw);
+    max-width: 340px;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(168, 85, 247, 0.14);
+    background:
+      radial-gradient(ellipse at 0% 0%, rgba(147,51,234,0.10) 0%, transparent 55%),
+      rgba(10, 8, 16, 0.72);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  .fli-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .fli-arrow {
+    opacity: 0.35;
+  }
+
+  /* data-reveal animasyonunu feat-list-item için iptal et —
+     slider itemları IntersectionObserver'ı tetiklemeyebilir */
+  .feat-list-item[data-reveal],
+  .feat-list-item[data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 }
 
@@ -4436,13 +4613,13 @@ svg {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Mobile Dot Indicators — varsayılanda gizli, 520px'te aktif
+   Mobile Dot Indicators — varsayılanda gizli, 680px'te aktif
    ───────────────────────────────────────────────────────────── */
 .mobile-dots {
   display: none;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 680px) {
 
   /* ── Dot konteyner ── */
   .mobile-dots {
@@ -4508,6 +4685,14 @@ svg {
     width: calc(85vw);
     max-width: 340px;
     scroll-snap-align: start;
+  }
+  /* Slider içindeki kartlar reveal animasyonu almaz */
+  .advantage-card[data-reveal],
+  .advantage-card[data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 
   /* ── 2. Features büyük kart grid: feat-hero-grid ── */
@@ -4588,6 +4773,14 @@ svg {
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 20px;
     padding: 20px 18px;
+  }
+  /* Slider içindeki kartlar reveal animasyonu almaz — görünmez kalabilir */
+  .feat-list-item[data-reveal],
+  .feat-list-item[data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
   }
 
   /* ── 5. Güvenlik stack: security-stack ── */
