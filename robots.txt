@@ -1,1 +1,10 @@
+User-agent: *
+Allow: /
 
+# Disallow dev / config files
+Disallow: /webconfig/
+Disallow: /*.json$
+Disallow: /*.sh$
+Disallow: /*.py$
+
+Sitemap: https://niveline.com/sitemap.xml
