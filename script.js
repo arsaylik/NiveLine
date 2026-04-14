@@ -1079,8 +1079,5 @@ initMobileSlider(".advantage-grid", "dots-advantage", ".advantage-card");
 // Canvas side mini-paneller
 initMobileSlider(".canvas-side", "dots-canvas-side", ".mini-panel");
 
-// Özellik listesi
-initMobileSlider(".feat-list", "dots-feat-list", ".feat-list-item");
-
 // Güvenlik stack
 initMobileSlider(".security-stack", "dots-security", ".stack-row");
