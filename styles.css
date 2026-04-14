@@ -4148,7 +4148,7 @@ svg {
   .hero-slider-controls {
     position: absolute;
     left: 50%;
-    bottom: 20px;
+    bottom: 8px;
     transform: translateX(-50%);
     z-index: 8;
     display: inline-flex;
@@ -4356,26 +4356,24 @@ svg {
     color: var(--purple-light);
   }
 
-  /* feat-list: yatay scroll-snap slider */
+  /* feat-list: mobilde dikey stack — tüm maddeler görünsün */
   .feat-list {
     display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    gap: 12px;
-    padding: 0 0 4px;
+    flex-direction: column;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    gap: 10px;
+    padding: 0;
     list-style: none;
   }
 
   .feat-list::-webkit-scrollbar { display: none; }
 
   .feat-list-item {
-    flex-shrink: 0;
-    width: calc(82vw);
-    max-width: 340px;
-    scroll-snap-align: start;
+    flex-shrink: 1;
+    width: 100%;
+    max-width: 100%;
+    scroll-snap-align: unset;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -4602,6 +4600,31 @@ svg {
     text-align: center;
   }
 
+  /* feat-list: mobilde dikey stack — tüm maddeler görünsün */
+  .feat-list {
+    display: flex;
+    flex-direction: column;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .feat-list-item {
+    flex-shrink: 1;
+    width: 100%;
+    max-width: 100%;
+    scroll-snap-align: unset;
+  }
+
+  .feat-list-item[data-reveal],
+  .feat-list-item[data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
   .download-meta {
     gap: 10px;
   }
@@ -4754,27 +4777,25 @@ svg {
   /* ── 4. Özellik listesi: feat-list ── */
   .feat-list {
     display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    gap: 12px;
-    padding: 0 0 4px;
+    flex-direction: column;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    gap: 10px;
+    padding: 0;
     list-style: none;
   }
   .feat-list::-webkit-scrollbar { display: none; }
   .feat-list-item {
-    flex-shrink: 0;
-    width: calc(82vw);
-    max-width: 320px;
-    scroll-snap-align: start;
+    flex-shrink: 1;
+    width: 100%;
+    max-width: 100%;
+    scroll-snap-align: unset;
     background: var(--card-bg-sm, rgba(255,255,255,0.04));
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 20px;
     padding: 20px 18px;
   }
-  /* Slider içindeki kartlar reveal animasyonu almaz — görünmez kalabilir */
+  /* Kartlar reveal animasyonu almaz — görünmez kalabilir */
   .feat-list-item[data-reveal],
   .feat-list-item[data-reveal].is-visible {
     opacity: 1;
