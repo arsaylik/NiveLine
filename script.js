@@ -826,11 +826,26 @@ const renderHeroSlider = () => {
   }
 
   heroShots.forEach((shot, index) => {
-    shot.classList.toggle("is-active", index === heroSliderIndex);
+    const isActive = index === heroSliderIndex;
+    shot.classList.toggle("is-active", isActive);
+    // Ken Burns animasyonunu resetle — yeni slayt her seferinde baştan başlar
+    if (isActive && shot.classList.contains("parallax-layer")) {
+      shot.style.animation = "none";
+      shot.offsetHeight; // reflow tetikle
+      shot.style.animation = "";
+    }
   });
 
+  // Dot progress animasyonunu resetle
   heroDots.forEach((dot, index) => {
-    dot.classList.toggle("is-active", index === heroSliderIndex);
+    const isActive = index === heroSliderIndex;
+    dot.classList.toggle("is-active", isActive);
+    if (isActive) {
+      // ::after pseudo-element animasyonunu resetle
+      dot.style.animation = "none";
+      dot.offsetHeight;
+      dot.style.animation = "";
+    }
   });
 };
 
@@ -865,6 +880,43 @@ heroDots.forEach((dot, index) => {
   });
 });
 
+/* ── Hero slider: parmakla kaydırma (swipe) desteği ── */
+if (stage) {
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+  let isSwiping = false;
+  const SWIPE_THRESHOLD = 40; // px
+
+  stage.addEventListener("pointerdown", (e) => {
+    if (!isHeroSliderMode()) return;
+    swipeStartX = e.clientX;
+    swipeStartY = e.clientY;
+    isSwiping = true;
+    stage.setPointerCapture(e.pointerId);
+  }, { passive: true });
+
+  stage.addEventListener("pointerup", (e) => {
+    if (!isHeroSliderMode() || !isSwiping) return;
+    isSwiping = false;
+    const dx = e.clientX - swipeStartX;
+    const dy = e.clientY - swipeStartY;
+    // Yatay hareket dikey hareketten büyükse slider'ı değiştir
+    if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) {
+        // sola → sonraki
+        heroSliderIndex = (heroSliderIndex + 1) % heroShots.length;
+      } else {
+        // sağa → önceki
+        heroSliderIndex = (heroSliderIndex - 1 + heroShots.length) % heroShots.length;
+      }
+      renderHeroSlider();
+      startHeroSlider();
+    }
+  }, { passive: true });
+
+  stage.addEventListener("pointercancel", () => { isSwiping = false; });
+}
+
 if (stage && parallaxLayers.length && !prefersReducedMotion) {
   const resetLayerShift = () => {
     parallaxLayers.forEach((layer) => {
@@ -874,6 +926,7 @@ if (stage && parallaxLayers.length && !prefersReducedMotion) {
   };
 
   stage.addEventListener("pointermove", (event) => {
+    if (isHeroSliderMode()) return; // mobilde parallax yok, sadece swipe
     const bounds = stage.getBoundingClientRect();
     const x = (event.clientX - bounds.left) / bounds.width - 0.5;
     const y = (event.clientY - bounds.top) / bounds.height - 0.5;
@@ -896,7 +949,7 @@ syncHeroSlider();
    Tüm bölümlerdeki scroll-snap sliderları için nokta göstergesi
    ───────────────────────────────────────────────────────────── */
 
-const isMobileSliderMode = () => window.innerWidth <= 520;
+const isMobileSliderMode = () => window.innerWidth <= 680;
 
 /**
  * Bir slider konteyner + dot konteyner çifti için sistemi başlatır.
