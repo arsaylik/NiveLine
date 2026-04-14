@@ -2,6 +2,26 @@ if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
 
+/* ── Coming Soon Splash Kapatma ── */
+(function () {
+  const overlay = document.getElementById("splashOverlay");
+  const cta = document.getElementById("splashCta");
+  if (!overlay || !cta) return;
+
+  // Body scroll'u kilitle
+  document.body.style.overflow = "hidden";
+
+  function dismissSplash() {
+    overlay.classList.add("is-leaving");
+    document.body.style.overflow = "";
+    overlay.addEventListener("transitionend", () => {
+      overlay.classList.add("is-hidden");
+    }, { once: true });
+  }
+
+  cta.addEventListener("click", dismissSplash);
+})();
+
 const translations = {
   tr: {
     metaTitle: "NiveLine | Seçici erişim ve çok katmanlı güvenlik üzerine inşa edilmiş mesajlaşma platformu",
@@ -13,21 +33,31 @@ const translations = {
     "nav.security": "Güvenlik",
     "nav.platforms": "İndir",
     "hero.eyebrow": "Seçici erişim ve çok katmanlı güvenlik üzerine inşa edildi",
-    "hero.title": "Mesajlaşmada daha yüksek bir standart.",
+    "hero.title": "Herkese açık değil. Seçtiğin kişilerle, güvenli, odaklanmış iletişim.",
     "hero.lead":
       "NiveLine; kimlerin size ulaşabileceğini, hesabınızın nasıl korunduğunu ve grup iletişiminin nasıl şekillendiğini tek bir bütünleşik ürün deneyiminde bir araya getirir.",
     "store.apple": "Download on the",
     "store.google": "Get it on",
-    "hero.note1": "Passkey destekli kimlik doğrulama",
-    "hero.note2": "Mesaj istekleriyle denetimli ilk temas",
-    "hero.note3": "QR ve davet kodu ile güvenli eşleşme",
-    "hero.note4": "Katılım öncesi grup önizlemesi",
-    "band.item1": "Passkey destekli kimlik doğrulama",
-    "band.item2": "Mesaj istekleriyle denetimli ilk temas",
-    "band.item3": "QR ve davet kodu ile güvenli eşleşme",
+    "hero.note1": "Şifresiz, donanım destekli kimlik doğrulama",
+    "hero.note1.label": "Passkey Güvenliği",
+    "hero.note2": "Mesaj istekleriyle yabancıya izinli erişim",
+    "hero.note2.label": "İlk Temas Kontrolü",
+    "hero.note3": "Siz davet etmeden kimse bulamaz",
+    "hero.note3.label": "QR & Davet Kodu",
+    "hero.note4": "Katılmadan önce içeriği ve üyeleri görün",
+    "hero.note4.label": "Grup Önizlemesi",
+    "band.item1": "Passkey destekli erişim",
+    "band.item1.label": "Passkey",
+    "band.item2": "Mesaj istekleriyle seçici ilk temas",
+    "band.item2.label": "İlk Temas",
+    "band.item3": "QR ve davet kodu ile kontrollü eşleşme",
+    "band.item3.label": "QR & Davet",
     "band.item4": "Katılım öncesi grup önizlemesi",
+    "band.item4.label": "Grup Önizleme",
     "band.item5": "Gizlilik tercihleriniz tamamen sizin kontrolünüzde",
+    "band.item5.label": "Gizlilik",
     "band.item6": "iOS ve Android",
+    "band.item6.label": "Platformlar",
     "story.eyebrow": "Yaklaşım",
     "story.title": "Erişimden grup iletişimine kadar her adım amaca uygun tasarlandı.",
     "story.body":
@@ -164,7 +194,11 @@ const translations = {
     "footer.badge1": "Passkey güvenliği",
     "footer.badge2": "E2E şifreli",
     "footer.badge3": "iOS & Android",
-    "footer.copy": "© {year} NiveLine. Tüm hakları saklıdır."
+    "footer.copy": "© {year} NiveLine. Tüm hakları saklıdır.",
+    "splash.title": "Çok Yakında",
+    "splash.sub": "Daha bilinçli bir mesajlaşma deneyimi yolda.",
+    "splash.cta": "Keşfet",
+    "splash.badge": "2026"
   },
   en: {
     metaTitle: "NiveLine | Modern messaging built on selective access and layered security",
@@ -176,21 +210,31 @@ const translations = {
     "nav.security": "Security",
     "nav.platforms": "Platforms",
     "hero.eyebrow": "Built on selective access and layered security",
-    "hero.title": "A more deliberate standard for messaging.",
+    "hero.title": "Not open to everyone. Secure, focused communication with the people you choose.",
     "hero.lead":
       "NiveLine brings together who can reach you, how the account is protected and how group communication begins in one refined product experience.",
     "store.apple": "Download on the",
     "store.google": "Get it on",
-    "hero.note1": "Passkey-ready account access",
-    "hero.note2": "Filtered first contact with message requests",
-    "hero.note3": "Controlled matching through QR and invite codes",
-    "hero.note4": "Group previews before joining",
+    "hero.note1": "Password-free, hardware-backed authentication",
+    "hero.note1.label": "Passkey Security",
+    "hero.note2": "Strangers reach you only through approved requests",
+    "hero.note2.label": "First Contact Control",
+    "hero.note3": "No one finds you unless you invite them",
+    "hero.note3.label": "QR & Invite Code",
+    "hero.note4": "See the content and members before you join",
+    "hero.note4.label": "Group Preview",
     "band.item1": "Passkey-ready access",
+    "band.item1.label": "Passkey",
     "band.item2": "Selective first contact with requests",
+    "band.item2.label": "First Contact",
     "band.item3": "Controlled matching through QR and invite codes",
+    "band.item3.label": "QR & Invite",
     "band.item4": "Group previews before joining",
+    "band.item4.label": "Group Preview",
     "band.item5": "High control over privacy preferences",
+    "band.item5.label": "Privacy",
     "band.item6": "iOS and Android",
+    "band.item6.label": "Platforms",
     "story.eyebrow": "Approach",
     "story.title": "Every step, from access to group flow, is designed with more intention.",
     "story.body":
@@ -327,7 +371,11 @@ const translations = {
     "footer.badge1": "Passkey security",
     "footer.badge2": "E2E encrypted",
     "footer.badge3": "iOS & Android",
-    "footer.copy": "© {year} NiveLine. All rights reserved."
+    "footer.copy": "© {year} NiveLine. All rights reserved.",
+    "splash.title": "Coming Soon",
+    "splash.sub": "A more intentional messaging experience is on the way.",
+    "splash.cta": "Explore",
+    "splash.badge": "2025"
   },
   es: {
     metaTitle: "NiveLine | Mensajeria moderna construida sobre acceso selectivo y seguridad por capas",
@@ -339,21 +387,31 @@ const translations = {
     "nav.security": "Seguridad",
     "nav.platforms": "Plataformas",
     "hero.eyebrow": "Construido sobre acceso selectivo y seguridad por capas",
-    "hero.title": "Un estandar mas deliberado para la mensajeria.",
+    "hero.title": "No abierto a todos. Comunicacion segura y enfocada con las personas que eliges.",
     "hero.lead":
       "NiveLine reune quien puede contactarte, como se protege la cuenta y como comienza la comunicacion en grupos dentro de una experiencia de producto refinada.",
     "store.apple": "Download on the",
     "store.google": "Get it on",
-    "hero.note1": "Acceso a la cuenta listo para passkeys",
-    "hero.note2": "Primer contacto filtrado con solicitudes de mensaje",
-    "hero.note3": "Emparejamiento controlado con QR y codigos de invitacion",
-    "hero.note4": "Vista previa del grupo antes de entrar",
+    "hero.note1": "Autenticacion sin contrasena respaldada por hardware",
+    "hero.note1.label": "Seguridad Passkey",
+    "hero.note2": "Los desconocidos te contactan solo con tu permiso",
+    "hero.note2.label": "Control de Primer Contacto",
+    "hero.note3": "Nadie te encuentra si no los invitas",
+    "hero.note3.label": "QR y Codigo de Invitacion",
+    "hero.note4": "Ve el contenido y los miembros antes de entrar",
+    "hero.note4.label": "Vista Previa del Grupo",
     "band.item1": "Acceso listo para passkeys",
+    "band.item1.label": "Passkey",
     "band.item2": "Primer contacto selectivo con solicitudes",
+    "band.item2.label": "Primer Contacto",
     "band.item3": "Emparejamiento controlado con QR y codigos",
+    "band.item3.label": "QR e Invitacion",
     "band.item4": "Vista previa del grupo antes de entrar",
+    "band.item4.label": "Vista Previa",
     "band.item5": "Mayor control sobre la privacidad",
+    "band.item5.label": "Privacidad",
     "band.item6": "iOS y Android",
+    "band.item6.label": "Plataformas",
     "story.eyebrow": "Enfoque",
     "story.title": "Cada paso, desde el acceso hasta el flujo grupal, esta pensado con mayor intencion.",
     "story.body":
@@ -490,7 +548,11 @@ const translations = {
     "footer.badge1": "Seguridad Passkey",
     "footer.badge2": "Cifrado E2E",
     "footer.badge3": "iOS & Android",
-    "footer.copy": "© {year} NiveLine. Todos los derechos reservados."
+    "footer.copy": "© {year} NiveLine. Todos los derechos reservados.",
+    "splash.title": "Muy Pronto",
+    "splash.sub": "Una experiencia de mensajería más consciente está en camino.",
+    "splash.cta": "Explorar",
+    "splash.badge": "2025"
   }
 };
 
@@ -812,3 +874,144 @@ if (stage && parallaxLayers.length && !prefersReducedMotion) {
 
 window.addEventListener("resize", syncHeroSlider);
 syncHeroSlider();
+
+/* ─────────────────────────────────────────────────────────────
+   Mobile Scroll-Snap Slider Dots
+   Tüm bölümlerdeki scroll-snap sliderları için nokta göstergesi
+   ───────────────────────────────────────────────────────────── */
+
+const isMobileSliderMode = () => window.innerWidth <= 520;
+
+/**
+ * Bir slider konteyner + dot konteyner çifti için sistemi başlatır.
+ * @param {string} trackSelector   - kaydırma yapılan elementin CSS seçicisi
+ * @param {string} dotsId          - nokta konteynerinin id'si
+ * @param {string} itemSelector    - her slayt öğesinin CSS seçicisi
+ */
+function initMobileSlider(trackSelector, dotsId, itemSelector) {
+  const track = document.querySelector(trackSelector);
+  const dotsEl = document.getElementById(dotsId);
+  if (!track || !dotsEl) return;
+
+  let items = [];
+  let dotEls = [];
+  let built = false;
+
+  function buildDots() {
+    items = Array.from(track.querySelectorAll(itemSelector));
+    dotsEl.innerHTML = "";
+    dotEls = items.map((_, i) => {
+      const d = document.createElement("span");
+      d.className = "mobile-dot" + (i === 0 ? " is-active" : "");
+      d.addEventListener("click", () => scrollToItem(i));
+      dotsEl.appendChild(d);
+      return d;
+    });
+    built = true;
+  }
+
+  function scrollToItem(index) {
+    const item = items[index];
+    if (!item) return;
+    track.scrollTo({ left: item.offsetLeft - track.offsetLeft, behavior: "smooth" });
+  }
+
+  function updateActiveDot() {
+    if (!built || items.length === 0) return;
+    // En çok görünür öğeyi bul
+    let bestIndex = 0;
+    let bestOverlap = -1;
+    const trackLeft = track.scrollLeft;
+    const trackRight = trackLeft + track.clientWidth;
+    items.forEach((item, i) => {
+      const itemLeft = item.offsetLeft - track.offsetLeft;
+      const itemRight = itemLeft + item.offsetWidth;
+      const overlap = Math.min(itemRight, trackRight) - Math.max(itemLeft, trackLeft);
+      if (overlap > bestOverlap) {
+        bestOverlap = overlap;
+        bestIndex = i;
+      }
+    });
+    dotEls.forEach((d, i) => d.classList.toggle("is-active", i === bestIndex));
+  }
+
+  function onResize() {
+    if (isMobileSliderMode()) {
+      if (!built) buildDots();
+      dotsEl.style.display = "";
+      updateActiveDot();
+    } else {
+      dotsEl.style.display = "none";
+    }
+  }
+
+  track.addEventListener("scroll", updateActiveDot, { passive: true });
+  window.addEventListener("resize", onResize);
+  onResize();
+}
+
+// Advantage (Fark bölümü)
+initMobileSlider(".advantage-grid", "dots-advantage", ".advantage-card");
+
+// Features büyük kart grid — her doğrudan çocuk bir slayt
+// feat-hero-grid'in doğrudan çocukları: feat-card--large ve feat-col-right
+(function () {
+  const track = document.querySelector(".feat-hero-grid");
+  const dotsEl = document.getElementById("dots-feat-hero");
+  if (!track || !dotsEl) return;
+  let items = [];
+  let dotEls = [];
+  let built = false;
+
+  function buildDots() {
+    items = Array.from(track.children);
+    dotsEl.innerHTML = "";
+    dotEls = items.map((_, i) => {
+      const d = document.createElement("span");
+      d.className = "mobile-dot" + (i === 0 ? " is-active" : "");
+      d.addEventListener("click", () => {
+        const item = items[i];
+        if (item) track.scrollTo({ left: item.offsetLeft - track.offsetLeft, behavior: "smooth" });
+      });
+      dotsEl.appendChild(d);
+      return d;
+    });
+    built = true;
+  }
+
+  function updateActiveDot() {
+    if (!built || items.length === 0) return;
+    let bestIndex = 0, bestOverlap = -1;
+    const tl = track.scrollLeft, tr = tl + track.clientWidth;
+    items.forEach((item, i) => {
+      const il = item.offsetLeft - track.offsetLeft;
+      const ir = il + item.offsetWidth;
+      const overlap = Math.min(ir, tr) - Math.max(il, tl);
+      if (overlap > bestOverlap) { bestOverlap = overlap; bestIndex = i; }
+    });
+    dotEls.forEach((d, i) => d.classList.toggle("is-active", i === bestIndex));
+  }
+
+  function onResize() {
+    if (isMobileSliderMode()) {
+      if (!built) buildDots();
+      dotsEl.style.display = "";
+      updateActiveDot();
+    } else {
+      dotsEl.style.display = "none";
+    }
+  }
+
+  track.addEventListener("scroll", updateActiveDot, { passive: true });
+  window.addEventListener("resize", onResize);
+  onResize();
+})();
+
+// Canvas side mini-paneller
+initMobileSlider(".canvas-side", "dots-canvas-side", ".mini-panel");
+
+// Özellik listesi
+initMobileSlider(".feat-list", "dots-feat-list", ".feat-list-item");
+
+// Güvenlik stack
+initMobileSlider(".security-stack", "dots-security", ".stack-row");
