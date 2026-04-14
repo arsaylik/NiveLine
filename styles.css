@@ -87,14 +87,14 @@
 .splash-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(80px);
   pointer-events: none;
   opacity: 0.5;
 }
 
 .splash-glow-a {
-  width: 420px;
-  height: 420px;
+  width: min(420px, 90vw);
+  height: min(420px, 90vw);
   background: rgba(168, 85, 247, 0.28);
   top: -80px;
   left: -60px;
@@ -102,8 +102,8 @@
 }
 
 .splash-glow-b {
-  width: 320px;
-  height: 320px;
+  width: min(320px, 80vw);
+  height: min(320px, 80vw);
   background: rgba(126, 34, 206, 0.22);
   bottom: -60px;
   right: -40px;
@@ -124,6 +124,10 @@
   align-items: center;
   text-align: center;
   gap: 0;
+  width: 100%;
+  max-width: 480px;
+  padding: 0 28px;
+  box-sizing: border-box;
   animation: splashFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -137,14 +141,14 @@
 }
 
 .splash-logo img {
-  width: clamp(140px, 32vw, 200px);
+  width: clamp(120px, 42vw, 200px);
   height: auto;
   filter: brightness(1.1);
 }
 
 .splash-title {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 10vw, 4.2rem);
+  font-size: clamp(2.6rem, 12vw, 4.2rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
@@ -158,11 +162,11 @@
 
 .splash-sub {
   font-family: var(--font-ui);
-  font-size: clamp(0.95rem, 3vw, 1.15rem);
+  font-size: clamp(0.88rem, 3.5vw, 1.10rem);
   color: var(--muted);
-  margin: 14px 0 0;
-  max-width: 36ch;
-  line-height: 1.55;
+  margin: 16px 0 0;
+  max-width: 30ch;
+  line-height: 1.60;
   animation: splashFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
 }
 
@@ -178,19 +182,24 @@
 .splash-cta {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 28px;
-  padding: 14px 32px;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+  padding: 16px 36px;
+  min-height: 54px;
+  min-width: 180px;
   border: 1px solid rgba(168, 85, 247, 0.30);
   border-radius: 999px;
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(147, 51, 234, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 0%, rgba(147, 51, 234, 0.22) 0%, transparent 70%),
     rgba(10, 9, 15, 0.80);
   color: #ffffff;
   font-family: var(--font-ui);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition: transform 260ms ease,
               border-color 260ms ease,
               box-shadow 260ms ease,
@@ -209,11 +218,12 @@
 }
 
 .splash-cta:active {
-  transform: translateY(0);
+  transform: scale(0.97);
 }
 
 .splash-cta svg {
   transition: transform 260ms ease;
+  flex-shrink: 0;
 }
 
 .splash-cta:hover svg {
@@ -232,14 +242,99 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.30);
+  white-space: nowrap;
   animation: splashFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
 }
 
+@media (max-width: 880px) {
+  .splash-content {
+    padding: 0 24px;
+    max-width: 100%;
+  }
+
+  .splash-logo {
+    margin-bottom: 24px;
+  }
+
+  .splash-logo img {
+    width: clamp(110px, 45vw, 160px);
+  }
+
+  .splash-line {
+    margin-top: 24px;
+  }
+
+  .splash-cta {
+    margin-top: 28px;
+    padding: 15px 32px;
+    font-size: 0.96rem;
+    min-height: 52px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .splash-badge {
+    bottom: 28px;
+    font-size: 0.72rem;
+  }
+}
+
 @media (max-width: 520px) {
-  .splash-glow-a { width: 260px; height: 260px; }
-  .splash-glow-b { width: 200px; height: 200px; }
-  .splash-cta { padding: 12px 26px; font-size: 0.88rem; }
-  .splash-badge { bottom: 24px; }
+  .splash-glow-a {
+    width: 70vw;
+    height: 70vw;
+    top: -10vw;
+    left: -15vw;
+  }
+
+  .splash-glow-b {
+    width: 55vw;
+    height: 55vw;
+    bottom: -8vw;
+    right: -12vw;
+  }
+
+  .splash-content {
+    padding: 0 20px;
+  }
+
+  .splash-logo {
+    margin-bottom: 20px;
+  }
+
+  .splash-logo img {
+    width: clamp(100px, 48vw, 148px);
+  }
+
+  .splash-title {
+    font-size: clamp(2.8rem, 14vw, 3.6rem);
+  }
+
+  .splash-sub {
+    font-size: 0.91rem;
+    margin-top: 14px;
+    max-width: 28ch;
+  }
+
+  .splash-line {
+    margin-top: 22px;
+    width: 40px;
+  }
+
+  .splash-cta {
+    margin-top: 24px;
+    padding: 15px 28px;
+    font-size: 0.94rem;
+    min-height: 52px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .splash-badge {
+    bottom: 20px;
+    font-size: 0.68rem;
+    letter-spacing: 0.10em;
+  }
 }
 
 html {
@@ -1774,10 +1869,10 @@ svg {
 
 /* ── Band item — yeni premium kart yapısı ── */
 .band-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 14px;
-  padding: 13px 20px 13px 12px;
+  padding: 14px 20px 14px 14px;
   border: 1px solid rgba(168, 85, 247, 0.16);
   border-radius: 18px;
   background:
@@ -1789,6 +1884,7 @@ svg {
     0 4px 16px rgba(0,0,0,0.22);
   transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   cursor: default;
+  box-sizing: border-box;
 }
 
 .band-item:hover {
@@ -1831,6 +1927,8 @@ svg {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
+  min-width: 0;
 }
 
 .band-item-label {
@@ -3709,39 +3807,52 @@ svg {
     transform: translateY(0) scale(1);
   }
 
-  /* Band item mobil: 2 sütun grid */
+  /* Band item mobil: tek sütun, tam genişlik */
   .band-track {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
-    padding: 18px;
+    padding: 20px;
     border-radius: 24px;
   }
 
   .band-item {
-    padding: 13px 16px 13px 12px;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 16px 20px 16px 16px;
     border-radius: 16px;
-    gap: 12px;
+    gap: 16px;
+  }
+
+  .band-item-text {
+    flex: 1;
+    min-width: 0;
   }
 
   .band-item-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 11px;
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
+    flex-shrink: 0;
   }
 
   .band-item-icon svg {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
   }
 
   .band-item-label {
-    font-size: 0.64rem;
+    font-size: 0.66rem;
+    margin-bottom: 3px;
   }
 
   .band-item-desc {
-    font-size: 0.80rem;
-    line-height: 1.40;
+    font-size: 0.88rem;
+    line-height: 1.42;
+    white-space: normal;
+    word-break: keep-all;
   }
 
   .hero {
@@ -4196,30 +4307,34 @@ svg {
 
   .band-track {
     border-radius: 20px;
-    padding: 14px;
+    padding: 16px;
     gap: 8px;
   }
 
   .band-item {
-    padding: 11px 14px 11px 11px;
-    gap: 10px;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px 14px 14px;
+    gap: 14px;
     border-radius: 14px;
   }
 
   .band-item-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    flex-shrink: 0;
   }
 
   .band-item-icon svg {
-    width: 13px;
-    height: 13px;
+    width: 16px;
+    height: 16px;
   }
 
   .band-item-desc {
-    font-size: 0.76rem;
-    line-height: 1.38;
+    font-size: 0.82rem;
+    line-height: 1.40;
   }
 
   .canvas-shell,
